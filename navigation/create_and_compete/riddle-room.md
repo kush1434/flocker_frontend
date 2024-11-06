@@ -53,3 +53,50 @@ author: Kush, Tarun, Vincent, and Nolan
 </div>
 
 <script src="{{site.baseurl}}/navigation/create_and_compete/riddle.js"></script>
+
+<script type = 'module'> 
+const response = await fetch(`${pythonURI}/api/channels/filter`, {
+    ...fetchOptions,
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ group_name: groupName })
+});
+
+const postData = {
+    title: title,
+    comment: comment,
+    channel_id: channelId
+};
+const response = await fetch(`${pythonURI}/api/post`, {
+    ...fetchOptions,
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(postData)
+});
+
+
+cconst response = await fetch(`${pythonURI}/api/posts/filter`, {
+    ...fetchOptions,
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ channel_id: channelId })
+});
+const postData = await response.json();
+postData.forEach(postItem => {
+    const postElement = document.createElement('div');
+    postElement.className = 'post-item';
+    postElement.innerHTML = `
+        <h3>${postItem.title}</h3>
+        <p><strong>Channel:</strong> ${postItem.channel_name}</p>
+        <p><strong>User:</strong> ${postItem.user_name}</p>
+        <p>${postItem.comment}</p>
+    `;
+    detailsDiv.appendChild(postElement);
+});
+</script>
