@@ -105,4 +105,3 @@ postData.forEach(postItem => {
     `;
     detailsDiv.appendChild(postElement);
 });
-</script>
