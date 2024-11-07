@@ -56,6 +56,10 @@ author: Kush, Tarun, Vincent, and Nolan
 
 <script src="{{site.baseurl}}/navigation/create_and_compete/riddle.js"></script>
 
+<div style="display: flex; justify-content: center; margin-top: 50px;">
+    <button id="feedback-button" onclick="window.location.href='https://github.com/kush1434/flocker_frontend/issues/2'">Feedback</button>
+</div>
+
 <script type = 'module'> 
 const response = await fetch(`${pythonURI}/api/channels/filter`, {
     ...fetchOptions,
