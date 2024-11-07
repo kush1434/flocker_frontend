@@ -6,6 +6,14 @@ const riddleText = document.getElementById('riddle-text');
 const users = new Set(['System']);
 let username;
 let currentRiddle = {};
+const serverSocketEndpoint = "http://127.0.0.1:8887/"
+
+var socket = io(`${serverSocketEndpoint}/`,{ autoConnect: false,extraHeaders: { //connect to the backend with socket.io
+  } });
+
+  socket.on('connect', function() {
+   socket.emit("join","chat")
+});
 
 // Function to fetch a random riddle from the API
 async function fetchRiddle() {
@@ -80,7 +88,14 @@ function sendMessage() {
         displayMessage(`${username}: ${messageText}`);
         messageInput.value = '';
     }
+    socket.emit("sendMessage",messageText)
+    
 }
+
+socket.on("recieveMessage",function(data)
+{
+    displayMessage(`${data["name"]}: ${data["message"]}`)
+})
 
 function isAnswerCloseEnough(userAnswer, correctAnswer) {
     // If the answer matches exactly, it’s correct
@@ -126,3 +141,4 @@ function checkAnswer() {
 displayMessage("Welcome to the Riddle Room Chat!", true);
 requestUsername();
 displayRiddle();
+

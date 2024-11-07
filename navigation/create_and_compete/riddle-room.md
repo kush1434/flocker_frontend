@@ -7,6 +7,8 @@ menu: nav/create_and_compete.html
 author: Kush, Tarun, Vincent, and Nolan
 ---
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.js" integrity="sha512-tE1z+95+lMCGwy+9PnKgUSIeHhvioC9lMlI7rLWU0Ps3XTdjRygLcy4mLuL0JAoK4TLdQEyP0yOl/9dMOqpH/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <link rel="stylesheet" href="{{site.baseurl}}/navigation/create_and_compete/riddle.css">
 
 <details>
