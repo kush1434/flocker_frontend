@@ -54,18 +54,23 @@ function displayRiddle() {
 }
 
 function requestUsername() {
-    while (true) {
+    // Only prompt for username if it hasn't been set yet.
+    if (!username) {
         const enteredUsername = prompt("Enter your username:");
+        
+        // Check if the username is valid and not already taken
         if (enteredUsername && !users.has(enteredUsername)) {
             username = enteredUsername;
-            addUser(username);
-            displayMessage(`You have joined as ${username}.`, true);
-            break;
+            addUser(username); // Add user to the list
+            displayMessage(`You have joined as ${username}.`, true); // Display system message
         } else {
+            // Alert if the username is taken or invalid, and try again
             alert("Username is taken or invalid. Please try again.");
+            requestUsername(); // Re-prompt for username
         }
     }
 }
+
 
 function displayMessage(message, isSystem = false) {
     const messageElement = document.createElement('div');
@@ -142,3 +147,39 @@ displayMessage("Welcome to the Riddle Room Chat!", true);
 requestUsername();
 displayRiddle();
 
+// Store messages in an array
+let messageHistory = JSON.parse(localStorage.getItem('chatMessages')) || [];
+
+// Function to save messages to local storage
+function saveMessagesToLocalStorage() {
+    localStorage.setItem('chatMessages', JSON.stringify(messageHistory));
+}
+
+// Function to load messages from local storage
+function loadMessagesFromLocalStorage() {
+    messageHistory.forEach(message => {
+        displayMessage(message.text, message.isSystem);
+    });
+}
+
+// Update sendMessage function to save each message
+function sendMessage() {
+    const messageText = messageInput.value.trim();
+    if (messageText !== '') {
+        const message = { text: `${username}: ${messageText}`, isSystem: false };
+        displayMessage(message.text);
+        
+        // Add to message history and save to localStorage
+        messageHistory.push(message);
+        saveMessagesToLocalStorage();
+        
+        messageInput.value = '';
+    }
+    socket.emit("sendMessage", messageText);
+}
+
+// Initial setup
+displayMessage("Welcome to the Riddle Room Chat!", true);
+loadMessagesFromLocalStorage();
+requestUsername();
+displayRiddle();
