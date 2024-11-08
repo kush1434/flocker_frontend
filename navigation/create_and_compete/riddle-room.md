@@ -49,68 +49,123 @@ author: Kush, Tarun, Vincent, and Nolan
     <button id="send-button" onclick="sendMessage()">Send</button>
 </div>
 
-<div class="input-group">
+<form id="input-group">
     <input type="text" id="answer-input" placeholder="Enter your answer(with no extra characters)...">
     <button id="check-answer" onclick="checkAnswer()">Check Answer</button>
-</div>
-
-<script src="{{site.baseurl}}/navigation/create_and_compete/riddle.js"></script>
+</form>
 
 <div style="display: flex; justify-content: center; margin-top: 50px;">
     <button id="feedback-button" onclick="window.location.href='https://github.com/kush1434/flocker_frontend/issues/2'">Feedback</button>
 </div>
 
-<script type = 'module'> 
-const response = await fetch(`${pythonURI}/api/channels/filter`, {
-    ...fetchOptions,
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ group_name: groupName })
-});
+<!-- <script src="{{site.baseurl}}/navigation/create_and_compete/riddle.js"></script> -->
 
-const postData = {
-    title: title,
-    comment: comment,
-    channel_id: channelId
-};
-const response = await fetch(`${pythonURI}/api/post`, {
-    ...fetchOptions,
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(postData)
-});
+<script type='module'> 
+document.getElementById('input-group').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        console.log("message sent");
+
+        // Extract data from form
+        const title = "title";
+        const comment = document.getElementById('message-input').value;
+        // const channelId = document.getElementById('channel_id').value;
+        const channelId = 14
+
+        // Create API payload
+        const postData = {
+            title: title,
+            comment: comment,
+            channel_id: channelId
+        };
+        console.log(postData);
+
+        // Trap errors
+        try {
+            // Send POST request to backend, purpose is to write to database
+            const response = await fetch(`${pythonURI}/api/post`, {
+                ...fetchOptions,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postData)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to add post: ' + response.statusText);
+            }
+
+            // Successful post
+            const result = await response.json();
+            console.log(result);
+            alert('Post added successfully!');
+            document.getElementById('postForm').reset();
+            // fetchData(channelId);
+        } catch (error) {
+            // Present alert on error from backend
+            console.error('Error adding post:', error);
+            alert('Error adding post: ' + error.message);
+        }
+}
+</script> 
 
 
-cconst response = await fetch(`${pythonURI}/api/posts/filter`, {
-    ...fetchOptions,
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ channel_id: channelId })
-});
-const postData = await response.json();
-postData.forEach(postItem => {
-    const postElement = document.createElement('div');
-    postElement.className = 'post-item';
-    postElement.innerHTML = `
-        <h3>${postItem.title}</h3>
-        <p><strong>Channel:</strong> ${postItem.channel_name}</p>
-        <p><strong>User:</strong> ${postItem.user_name}</p>
-        <p>${postItem.comment}</p>
-    `;
-    detailsDiv.appendChild(postElement);
-});
 
-const response = await fetch(`${pythonURI}/api/post`, {
-    ...fetchOptions,
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ section_name: "Riddle_Room" })
-});
+
+
+
+<script>
+// const response = await fetch(`${pythonURI}/api/channels/filter`, {
+//     ...fetchOptions,
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({ group_name: groupName })
+// });
+
+// const postData = {
+//     title: title,
+//     comment: comment,
+//     channel_id: channelId
+// };
+// const response = await fetch(`${pythonURI}/api/post`, {
+//     ...fetchOptions,
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(postData)
+// });
+
+
+// cconst response = await fetch(`${pythonURI}/api/posts/filter`, {
+//     ...fetchOptions,
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({ channel_id: channelId })
+// });
+// const postData = await response.json();
+// postData.forEach(postItem => {
+//     const postElement = document.createElement('div');
+//     postElement.className = 'post-item';
+//     postElement.innerHTML = `
+//         <h3>${postItem.title}</h3>
+//         <p><strong>Channel:</strong> ${postItem.channel_name}</p>
+//         <p><strong>User:</strong> ${postItem.user_name}</p>
+//         <p>${postItem.comment}</p>
+//     `;
+//     detailsDiv.appendChild(postElement);
+// });
+
+// const response = await fetch(`${pythonURI}/api/post`, {
+//     ...fetchOptions,
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({ section_name: "Riddle_Room" })
+// });
+</script>

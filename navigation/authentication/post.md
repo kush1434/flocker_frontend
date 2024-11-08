@@ -173,7 +173,8 @@ search_exclude: true
         // Extract data from form
         const title = document.getElementById('title').value;
         const comment = document.getElementById('comment').value;
-        const channelId = document.getElementById('channel_id').value;
+        // const channelId = document.getElementById('channel_id').value;
+        const channelId = 14
 
         // Create API payload
         const postData = {
@@ -202,7 +203,7 @@ search_exclude: true
             const result = await response.json();
             alert('Post added successfully!');
             document.getElementById('postForm').reset();
-            fetchData(channelId);
+            // fetchData(channelId);
         } catch (error) {
             // Present alert on error from backend
             console.error('Error adding post:', error);
