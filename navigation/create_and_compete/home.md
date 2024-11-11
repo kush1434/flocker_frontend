@@ -70,4 +70,11 @@ Welcome to the Riddle Room, where critical thinking and collaboration come toget
     The **Doodle Game** is a place where people can explore themselves creatively and compete to see who has the best doodle. This allows for players to collaborate over their artistic abilities. Our room includes a chat room where players can converse about their creations, a doodle compete area, a place where people can post their art, and winners get crowned every week. This will help add to our classes page by making a fun artistic environment where everyone can collaborate. <a href="{{site.baseurl}}/create_and_compete/doodle">Our page!</a> Coded by Arshia Deb Roy, Prajna Raj, Mirabelle Anderson, Alex Rubio
 </div>
 
+<div class="group-theme">
+    **TAKE OR MAKE?!??!?!!?!**
+    The Culinary Page is designed to take recipes or make recipes from a plethora of ingredients and recipes available. Users can interact and collaborate with other users to share recipes they find interesting and intriguing to others. Our room includes a user friendly interface that users can use to find recipes and then collaborate on our posts page seamlessely. This adds a nice touch to the page while also allowing users to collaborate and have fun with recipes they may enjor or indulge in. <a href="{{site.baseurl}}/create_and_compete/culinary">Here is our page!</a> Presented to you by Daksha, Darsh, Zach, Alex
+</div>
+
+
+
 

@@ -7,16 +7,26 @@ description: Vote for your favorite critters here!
 Authors: Maryam, Nora, Kushi, Joanna
 ---
 
-
 <style>
+    
 p, h2, h3, body {
- font-family: "Times New Roman", Times, serif;;
+ font-family: "Times New Roman", Times, serif;
 }
+ body {
+            font-family: "Times New Roman", Times, serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 10000;
+            margin: 0;
+            background: #d4637e !important;
+        }
 .header-text {
     font-size: 40px;
     text-align: center;
 }
-.container2 {
+.container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -34,13 +44,13 @@ p, h2, h3, body {
     width: 200px;
     padding: 10px;
     box-sizing: border-box;
-    border: 1px solid white;
+    border: 4px solid white;
     border-radius: 20px;
     cursor: pointer;
 }
 .critter-container.selected {
-    border-color: #007BFF;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Glow effect */
+    border-color: #FFC7FA;
+    box-shadow: 0 0 10px rgba(255, 199, 250, 0.7); /* Glow effect */
 }
 .image-container {
     width: auto;
@@ -70,10 +80,39 @@ p, h2, h3, body {
 .button-text {
     font-size: 30px;
     text-align: center;
+    background-color: #C71585; /* Change button color to dark pink */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+.button-text:hover {
+    background-color: #A0136B; /* Darker shade of dark pink on hover */
 }
 .hidden-example {
     display:none;
     font-size: 20px;
+}
+.comment-section {
+    display: none; 
+    max-width: 600px; 
+    margin: 20px auto; 
+    padding: 10px; 
+    border: 1px solid #ddd; 
+    border-radius: 5px;
+}
+.comment-button {
+    padding: 8px;
+    margin-top: 5px;
+    background-color: #C71585; /* Change button color to dark pink */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.comment-button:hover {
+    background-color: #A0136B; /* Darker shade of dark pink on hover */
 }
 .message-box {
     display:none; 
@@ -118,66 +157,102 @@ p {
     summary::before {
     content: '✿'; /* Unicode for vertical ellipsis */
 }
-.container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    max-width: 1200px;
-    padding: 20px;
-    box-sizing: border-box;
+
+.cute-link {
+  color: #ff69b4; 
+  text-decoration: none;
+  transition: all 0.1s ease-in-out;
 }
-.form-container {
-    display: flex;
-    flex-direction: column;
-    max-width: 800px;
-    width: 100%;
-    background-color: #2c3e50;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: #ecf0f1;
+
+.cute-link:hover {
+  color: #ff1493;
+  text-shadow: 0 0 8px rgba(255, 105, 180, 0.8),
+               0 0 15px rgba(255, 20, 147, 0.6),
+               0 0 20px rgba(255, 20, 147, 0.5);
 }
-.form-container label {
-    margin-bottom: 5px;
-}
-.form-container input, .form-container textarea, .form-container select {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
+.button-text {
+    font-size: 30px;
+    text-align: center;
+    background-color: #bd3a63 !important; /* Set button color to purple with high priority */
+    color: white !important;
     border: none;
-    width: 100%;
-}
-.form-container button {
-    padding: 10px;
     border-radius: 5px;
-    border: none;
-    background-color: #34495e;
-    color: #ecf0f1;
+    padding: 10px;
     cursor: pointer;
 }
+.button-text:hover {
+    background-color: #992b4e !important; /* Darker purple on hover */
+}
+
 </style>
+
+
+
+ <div class="sidebar">
+        <a href = "{{site.baseurl}}/moderation/calico_critter/" class = "sidebar-button">Moderator rules</a>
+        <a href="{{site.baseurl}}/voteforthegoat/calicoworkflow" class="sidebar-button">Workflow diagram</a>
+    </div>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Times New Roman", sans-serif;
+    line-height: 1.6;
+    background-color: #8B3D8A;
+    color: #f9f9f9;
+    margin: 0;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 50px;
+    height: 200px;
+    width: 150px;
+    background-color: #FFDFF7 !important;
+    border: 4px solid #BBDB9B;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding-top: 20px;
+    margin-top: 150px;
+    overflow: hidden;
+}
+
+.sidebar-button {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #EBA9D9 !important;
+    font-weight: bold;
+    transition: box-shadow 0.3s, color 0.3s, border-radius 0.3s;
+}
+
+.sidebar-button:hover {
+    box-shadow: 0 0 15px 5px #5E8636; 
+    color: #9C5F8C !important;
+    border-radius: 15px; 
+}
+
+a {
+    text-decoration: none !important;
+}
+</style>
+
 
 <div>
 <img src="{{site.baseurl}}/images/calicocritters/voteheading.png" alt="Calico Critters Voting header">
 </div>
 
-<h2>Moderator Rules for Calico Critters</h2>
-  <details>
-    <summary> Rules are put in place to make this page a safe environment!</summary>
-        <p>1. No cussing in the chats.</p>
-        <p>2. Stay on topic, Calico Critters only!</p>
-        <p>3. You have to be part of the DNHS Calico Critters club to join</p>
-        <p>4. You must have valid reasoning for your votes</p>
-        <p>5. Do not be toxic, negative, or attack others for their opinions.</p>
-  </details>
-
-<a href="{{site.baseurl}}/voteforthegoat/calicoworkflow">See our workflow here!</a>
-
 
 
 <p class="header-text">Click on a critter below to vote!</p>
 
-<div class="container2">
+<div class="container">
 <div class="critter-container" onclick="selectCritter(this)" data-critter="Mizuki" data-house="Adventure Play">
     <div class="image-container">
         <img src="{{site.baseurl}}/images/calicocritters/mizuki.png">
@@ -190,7 +265,7 @@ p {
         </details>
         <details>
             <summary>Description</summary>
-                <div class="dropdown">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit.</div>
+                <div class="dropdown">In an elegant baby blue gown with hints of yellow, Mizuki is kind and generous and offers an apple as a token of friendship</div>
         </details>
         <details>
             <summary>Collection</summary>
@@ -211,7 +286,7 @@ p {
         </details>
         <details>
             <summary>Description</summary>
-                <div class="dropdown">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit.</div>
+                <div class="dropdown">Always on time and only focuses on schoolwork. Only thing more important than good grades is staying hydrated.</div>
         </details>
         <details>
             <summary>Collection</summary>
@@ -232,7 +307,7 @@ p {
         </details>
         <details>
             <summary>Description</summary>
-                <div class="dropdown">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit.</div>
+                <div class="dropdown">She carries the heart of the sea and maintains peace with the land animals</div>
         </details>
         <details>
             <summary>Collection</summary>
@@ -253,7 +328,7 @@ p {
         </details>
         <details>
             <summary>Description</summary>
-                <div class="dropdown">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit.</div>
+                <div class="dropdown">Always looks her best and shares everything. She's always prepared and has everything in her handy backpack.</div>
         </details>
         <details>
             <summary>Collection</summary>
@@ -274,7 +349,7 @@ p {
         </details>
         <details>
             <summary>Description</summary>
-                <div class="dropdown">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit.</div>
+                <div class="dropdown">Keeps her fur pure white and fluffy, but easily gets lost.Luckily, she wears a bell to be found easily.</div>
         </details>
         <details>
             <summary>Collection</summary>
@@ -295,7 +370,7 @@ p {
         </details>
         <details>
             <summary>Description</summary>
-                <div class="dropdown">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin blandit.</div>
+                <div class="dropdown">Found in the kitchen baking a sweet treat, lives in an organized mess at all times</div>
         </details>
         <details>
             <summary>Collection</summary>
@@ -306,7 +381,7 @@ p {
 </div>
 <br>
 
-<div class="container2" style="justify-content:center;">
+<div class="container" style="justify-content:center;">
     <div class="button-container">
         <button id="confirmButton" class="button-text" onclick="confirmChoice();">Confirm</button>
     </div>
@@ -318,51 +393,9 @@ p {
 </div>
 -->
 
-
 <div class="message-box" id="messageBox" style="color: #ffffff;"></div>
 <div id="imageBox" class="image-box">
     <img id="houseImage" src="" alt="House Image" style="max-width:300px; border-radius:15px;">
-</div>
-
-
-<div class="container">
-    <div class="form-container">
-        <h2>Select Group and Channel</h2>
-        <form id="selectionForm">
-            <label for="group_id">Group:</label>
-            <select id="group_id" name="group_id" required>
-                <option value="">Select a group</option>
-            </select>
-            <label for="channel_id">Channel:</label>
-            <select id="channel_id" name="channel_id" required>
-                <option value="">Select a channel</option>
-            </select>
-            <button type="submit">Select</button>
-        </form>
-    </div>
-</div>
-
-<div class="container">
-    <div class="form-container">
-        <h2>Add New Post</h2>
-        <form id="postForm">
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" required>
-            <label for="comment">Comment:</label>
-            <textarea id="comment" name="comment" required></textarea>
-            <button type="submit">Add Post</button>
-        </form>
-    </div>
-</div>
-
-<div class="container">
-    <div id="data" class="data">
-        <div class="left-side">
-            <p id="count"></p>
-        </div>
-        <div class="details" id="details">
-        </div>
-    </div>
 </div>
 
 <script>
@@ -370,12 +403,12 @@ let selectedCritter = null;
 let selectedHouse = null;
 
 function selectCritter(element) {
-    const critters = document.querySelectorAll('.critter-container');
-    critters.forEach(critter => critter.classList.remove('selected')); // Remove selection from others
+const critters = document.querySelectorAll('.critter-container');
+critters.forEach(critter => critter.classList.remove('selected')); // Remove selection from others
 
-    element.classList.add('selected'); // Highlight the selected critter
-    selectedCritter = element.getAttribute('data-critter'); // Store selected critter name
-    selectedHouse = element.getAttribute('data-house'); // Store corresponding house
+element.classList.add('selected'); // Highlight the selected critter
+selectedCritter = element.getAttribute('data-critter'); // Store selected critter name
+selectedHouse = element.getAttribute('data-house'); // Store corresponding house
 }
 
 function confirmChoice() {
@@ -388,6 +421,42 @@ function confirmChoice() {
         return;
     }
 
+    // Save selectedHouse and description in local storage for later reference
+    localStorage.setItem('selectedHouse', selectedHouse);
+    console.log(`House saved to local storage: ${selectedHouse}`); // Log confirmation for saved house
+
+    // Add a description for each house
+    let houseDescription = "";
+    switch (selectedHouse) {
+        case 'Adventure Play':
+            houseDescription = 'A place for fun and exploration, filled with adventures.';
+            break;
+        case 'Sylvanian Family Restaurant':
+            houseDescription = 'A cozy restaurant known for delicious meals and warm gatherings.';
+            break;
+        case 'Magical Mermaid Castle':
+            houseDescription = 'An enchanting underwater castle full of wonder and magic.';
+            break;
+        case 'Woody School':
+            houseDescription = 'A learning environment where growth and knowledge are celebrated.';
+            break;
+        case 'Spooky Surprise Haunted':
+            houseDescription = 'A haunted house filled with spooky surprises and eerie charm.';
+            break;
+        case 'Brick Oven Bakery':
+            houseDescription = 'A delightful bakery with the aroma of freshly baked goods.';
+            break;
+        default:
+            houseDescription = 'An undefined house with its own unique qualities.';
+    }
+
+    localStorage.setItem('houseDescription', houseDescription);
+    console.log(`House description saved to local storage: ${houseDescription}`); // Log confirmation for saved description
+
+    // Save selectedCritter in local storage for later reference
+    localStorage.setItem('selectedCritter', selectedCritter);
+    console.log(`Critter saved to local storage: ${selectedCritter}`); // Log confirmation for saved critter
+
     // Set the message
     const message = `Congrats! You picked ${selectedCritter} and are in the ${selectedHouse} House!<br>Connect with others in the ${selectedHouse} House.`;
     messageBox.innerHTML = message; // Display the message
@@ -399,48 +468,6 @@ function confirmChoice() {
     houseImage.src = `${baseURL}${houseImageFile}`; // Set the image source
 
     imageBox.style.display = "block"; // Show the image box
-}
-
-
-function selectCritter(element) {
-    const critters = document.querySelectorAll('.critter-container');
-    critters.forEach(critter => critter.classList.remove('selected')); // Remove selection from others
-
-    element.classList.add('selected'); // Highlight the selected critter
-    selectedCritter = element.getAttribute('data-critter'); // Store selected critter name
-    selectedHouse = element.getAttribute('data-house'); // Store corresponding house
-
-    // Remove the previous "Enter House" button if it exists
-    const existingButtonContainer = document.querySelector('#houseButtonContainer');
-    if (existingButtonContainer) {
-        existingButtonContainer.remove();
-    }
-}
-
-function confirmChoice() {
-    const messageBox = document.getElementById('messageBox');
-    const imageBox = document.getElementById('imageBox');
-    const houseImage = document.getElementById('houseImage'); // Get image element
-
-    if (!selectedCritter || !selectedHouse) {
-        alert("Please select a critter before confirming!"); // Alert if nothing is selected
-        return;
-    }
-
-    // Set the message
-    const message = `Congrats! You picked ${selectedCritter} and are in the ${selectedHouse} House!<br>Connect with others in the ${selectedHouse} House.`;
-    messageBox.innerHTML = message; // Display the message
-    messageBox.style.display = "block"; // Make the message visible
-
-    // Use template literals to construct the image source
-    const baseURL = "{{site.baseurl}}/images/calicocritters/"; // Base URL for images
-    const houseImageFile = `${selectedCritter.toLowerCase()}house.png`; // Constructing the image file name
-    houseImage.src = `${baseURL}${houseImageFile}`; // Set the image source
-
-    imageBox.style.display = "block"; // Show the image box
-
-    // Optional: Display the comment section after confirmation
-    document.getElementById("commentSection").style.display = "block";
 
     // Remove any existing "Enter House" button before creating a new one
     const existingButtonContainer = document.querySelector('#houseButtonContainer');
@@ -456,6 +483,7 @@ function confirmChoice() {
     enterHouseButton.classList.add('button-text');
     enterHouseButton.textContent = `Enter ${selectedHouse} House`;
     enterHouseButton.onclick = function() {
+        console.log(`Navigating to the ${selectedHouse} House page`); // Log navigation action
         window.location.href = '{{site.baseurl}}/voteforthegoat/calicovote/house'; 
     };
 
@@ -463,179 +491,69 @@ function confirmChoice() {
     document.getElementById('imageBox').appendChild(buttonContainer);
 }
 
-</script>
+function selectCritter(element) {
+    const critters = document.querySelectorAll('.critter-container');
+    critters.forEach(critter => critter.classList.remove('selected')); // Remove selection from others
 
-<script type="module">
-    // Import server URI and standard fetch options
-    import { pythonURI, fetchOptions } from '{{ site.baseurl }}/assets/js/api/config.js';
+    element.classList.add('selected'); // Highlight the selected critter
+    selectedCritter = element.getAttribute('data-critter'); // Store selected critter name
+    selectedHouse = element.getAttribute('data-house'); // Store corresponding house
 
-    // Fetch groups for dropdown selection
-    async function fetchGroups() {
-        try {
-            const response = await fetch(`${pythonURI}/api/groups/filter`, {
-                ...fetchOptions,
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ section_name: "Home Page" }) // Adjust the section name as needed
-            });
-            if (!response.ok) {
-                throw new Error('Failed to fetch groups: ' + response.statusText);
-            }
-            const groups = await response.json();
-            const groupSelect = document.getElementById('group_id');
-            groups.forEach(group => {
-                const option = document.createElement('option');
-                option.value = group.name; // Use group name for payload
-                option.textContent = group.name;
-                groupSelect.appendChild(option);
-            });
-        } catch (error) {
-            console.error('Error fetching groups:', error);
-        }
+    // Remove the previous "Enter House" button if it exists
+    const existingButtonContainer = document.querySelector('#houseButtonContainer');
+    if (existingButtonContainer) {
+        existingButtonContainer.remove();
+    }
+}
+function confirmChoice() {
+    const messageBox = document.getElementById('messageBox');
+    const imageBox = document.getElementById('imageBox');
+    const houseImage = document.getElementById('houseImage'); // Get image element
+
+    if (!selectedCritter || !selectedHouse) {
+        alert("Please select a critter before confirming!"); // Alert if nothing is selected
+        return;
     }
 
-    // Fetch channels based on selected group
-    async function fetchChannels(groupName) {
-        try {
-            const response = await fetch(`${pythonURI}/api/channels/filter`, {
-                ...fetchOptions,
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ group_name: groupName })
-            });
-            if (!response.ok) {
-                throw new Error('Failed to fetch channels: ' + response.statusText);
-            }
-            const channels = await response.json();
-            const channelSelect = document.getElementById('channel_id');
-            channelSelect.innerHTML = '<option value="">Select a channel</option>'; // Reset channels
-            channels.forEach(channel => {
-                const option = document.createElement('option');
-                option.value = channel.id;
-                option.textContent = channel.name;
-                channelSelect.appendChild(option);
-            });
-        } catch (error) {
-            console.error('Error fetching channels:', error);
-        }
+    // Save selectedHouse in local storage for later reference
+    localStorage.setItem('selectedHouse', selectedHouse);
+    console.log(`House saved to local storage: ${selectedHouse}`); // Log confirmation for saved house
+
+    // Save selectedCritter in local storage for later reference
+    localStorage.setItem('selectedCritter', selectedCritter);
+    console.log(`Critter saved to local storage: ${selectedCritter}`); // Log confirmation for saved critter
+
+    // Set the message
+    const message = `Congrats! You picked ${selectedCritter} and are in the ${selectedHouse} House!<br>Connect with others in the ${selectedHouse} House.`;
+    messageBox.innerHTML = message; // Display the message
+    messageBox.style.display = "block"; // Make the message visible
+
+    // Use template literals to construct the image source
+    const baseURL = "{{site.baseurl}}/images/calicocritters/"; // Base URL for images
+    const houseImageFile = `${selectedCritter.toLowerCase()}house.png`; // Constructing the image file name
+    houseImage.src = `${baseURL}${houseImageFile}`; // Set the image source
+
+    imageBox.style.display = "block"; // Show the image box
+
+    // Remove any existing "Enter House" button before creating a new one
+    const existingButtonContainer = document.querySelector('#houseButtonContainer');
+    if (existingButtonContainer) {
+        existingButtonContainer.remove();
     }
 
-    // Handle group selection change
-    document.getElementById('group_id').addEventListener('change', function() {
-        const groupName = this.value;
-        if (groupName) {
-            fetchChannels(groupName);
-        } else {
-            document.getElementById('channel_id').innerHTML = '<option value="">Select a channel</option>'; // Reset channels
-        }
-    });
+    // Add the dynamic button for entering the house
+    const buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('button-container');
+    buttonContainer.id = 'houseButtonContainer';
+    const enterHouseButton = document.createElement('button');
+    enterHouseButton.classList.add('button-text');
+    enterHouseButton.textContent = `Enter ${selectedHouse} House`;
+    enterHouseButton.onclick = function() {
+        console.log(`Navigating to the ${selectedHouse} House page`); // Log navigation action
+        window.location.href = '{{site.baseurl}}/voteforthegoat/calicovote/house'; 
+    };
 
-    // Handle form submission for selection
-    document.getElementById('selectionForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const groupId = document.getElementById('group_id').value;
-        const channelId = document.getElementById('channel_id').value;
-        if (groupId && channelId) {
-            fetchData(channelId);
-        } else {
-            alert('Please select both group and channel.');
-        }
-    });
-
-    // Handle form submission for adding a post
-    document.getElementById('postForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
-
-        // Extract data from form
-        const title = document.getElementById('title').value;
-        const comment = document.getElementById('comment').value;
-        const channelId = document.getElementById('channel_id').value;
-
-        // Create API payload
-        const postData = {
-            title: title,
-            comment: comment,
-            channel_id: channelId
-        };
-
-        // Trap errors
-        try {
-            // Send POST request to backend, purpose is to write to database
-            const response = await fetch(`${pythonURI}/api/post`, {
-                ...fetchOptions,
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(postData)
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to add post: ' + response.statusText);
-            }
-
-            // Successful post
-            const result = await response.json();
-            alert('Post added successfully!');
-            document.getElementById('postForm').reset();
-            fetchData(channelId);
-        } catch (error) {
-            // Present alert on error from backend
-            console.error('Error adding post:', error);
-            alert('Error adding post: ' + error.message);
-        }
-    });
-
-    // Fetch posts based on selected channel
-    async function fetchData(channelId) {
-        try {
-            const response = await fetch(`${pythonURI}/api/posts/filter`, {
-                ...fetchOptions,
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ channel_id: channelId })
-            });
-            if (!response.ok) {
-                throw new Error('Failed to fetch posts: ' + response.statusText);
-            }
-
-            // Parse the JSON data
-            const postData = await response.json();
-
-            // Extract posts count
-            const postCount = postData.length || 0;
-
-            // Update the HTML elements with the data
-            document.getElementById('count').innerHTML = `<h2>Count ${postCount}</h2>`;
-
-            // Get the details div
-            const detailsDiv = document.getElementById('details');
-            detailsDiv.innerHTML = ''; // Clear previous posts
-
-            // Iterate over the postData and create HTML elements for each item
-            postData.forEach(postItem => {
-                const postElement = document.createElement('div');
-                postElement.className = 'post-item';
-                postElement.innerHTML = `
-                    <h3>${postItem.title}</h3>
-                    <p><strong>Channel:</strong> ${postItem.channel_name}</p>
-                    <p><strong>User:</strong> ${postItem.user_name}</p>
-                    <p>${postItem.comment}</p>
-                `;
-                detailsDiv.appendChild(postElement);
-            });
-
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    }
-
-    // Fetch groups when the page loads
-    fetchGroups();
+    buttonContainer.appendChild(enterHouseButton);
+    document.getElementById('imageBox').appendChild(buttonContainer);
+}
 </script>
