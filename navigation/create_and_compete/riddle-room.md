@@ -7,8 +7,6 @@ menu: nav/create_and_compete.html
 author: Kush, Tarun, Vincent, and Nolan
 ---
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.js" integrity="sha512-tE1z+95+lMCGwy+9PnKgUSIeHhvioC9lMlI7rLWU0Ps3XTdjRygLcy4mLuL0JAoK4TLdQEyP0yOl/9dMOqpH/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 <link rel="stylesheet" href="{{site.baseurl}}/navigation/create_and_compete/riddle.css">
 
 <details>
@@ -28,6 +26,7 @@ author: Kush, Tarun, Vincent, and Nolan
     <li>Profanity is censored</li>
   </ul>
 </details>
+
 
 <div id="riddle-container">
     <h4 style="text-align: center;">Riddle of the Day</h4>
@@ -49,10 +48,10 @@ author: Kush, Tarun, Vincent, and Nolan
     <button id="send-button" onclick="sendMessage()">Send</button>
 </div>
 
-<form id="input-group">
+<div class="input-group">
     <input type="text" id="answer-input" placeholder="Enter your answer(with no extra characters)...">
     <button id="check-answer" onclick="checkAnswer()">Check Answer</button>
-</form>
+</div>
 
 <div style="display: flex; justify-content: center; margin-top: 50px;">
     <button id="feedback-button" onclick="window.location.href='https://github.com/kush1434/flocker_frontend/issues/2'">Feedback</button>
@@ -103,15 +102,15 @@ author: Kush, Tarun, Vincent, and Nolan
 
 <div class="container">
     <div class="form-container">
-        <h2>Select Group and Channel</h2>
+        <h2>Select Room and Riddle</h2>
         <form id="selectionForm">
-            <label for="group_id">Group:</label>
+            <label for="group_id">Room:</label>
             <select id="group_id" name="group_id" required>
-                <option value="">Select a group</option>
+                <option value="">Select a room</option>
             </select>
-            <label for="channel_id">Channel:</label>
+            <label for="channel_id">Riddle:</label>
             <select id="channel_id" name="channel_id" required>
-                <option value="">Select a channel</option>
+                <option value="">Select a riddle</option>
             </select>
             <button type="submit">Select</button>
         </form>
@@ -122,9 +121,9 @@ author: Kush, Tarun, Vincent, and Nolan
     <div class="form-container">
         <h2>Add New Post</h2>
         <form id="postForm">
-            <label for="title">Title:</label>
+            <label for="title">Riddle:</label>
             <input type="text" id="title" name="title" required>
-            <label for="comment">Comment:</label>
+            <label for="comment">Answer:</label>
             <textarea id="comment" name="comment" required></textarea>
             <button type="submit">Add Post</button>
         </form>
@@ -291,7 +290,7 @@ author: Kush, Tarun, Vincent, and Nolan
             // Extract posts count
             const postCount = postData.length || 0;
             // Update the HTML elements with the data
-            document.getElementById('count').innerHTML = `<h2>Count ${postCount}</h2>`;
+            document.getElementById('count').innerHTML = `<h2>Riddle Answers: ${postCount}</h2>`;
             // Get the details div
             const detailsDiv = document.getElementById('details');
             detailsDiv.innerHTML = ''; // Clear previous posts
@@ -300,7 +299,7 @@ author: Kush, Tarun, Vincent, and Nolan
                 const postElement = document.createElement('div');
                 postElement.className = 'post-item';
                 postElement.innerHTML = `
-                    <h3>${postItem.title}</h3>
+                    <>${postItem.title}</p>
                     <p><strong>Channel:</strong> ${postItem.channel_name}</p>
                     <p><strong>User:</strong> ${postItem.user_name}</p>
                     <p>${postItem.comment}</p>

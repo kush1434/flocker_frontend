@@ -5,72 +5,48 @@ const userList = document.getElementById('userList');
 const riddleText = document.getElementById('riddle-text');
 const users = new Set(['System']);
 let username;
-let currentRiddle = {};
-const serverSocketEndpoint = "http://127.0.0.1:8887/"
+let currentRiddle = {}; 
 
-var socket = io(`${serverSocketEndpoint}/`,{ autoConnect: false,extraHeaders: { //connect to the backend with socket.io
-  } });
-
-  socket.on('connect', function() {
-   socket.emit("join","chat")
-});
-
-// Function to fetch a random riddle from the API
-async function fetchRiddle() {
-    try {
-        const response = await fetch("https://riddles-api.vercel.app/random");
-        if (response.ok) {
-            const data = await response.json();
-            currentRiddle = { question: data.riddle, answer: data.answer.toLowerCase() }; // Store answer in lowercase
-            riddleText.textContent = currentRiddle.question;
-        } else {
-            displayMessage("Error fetching riddle from API.", true);
-        }
-    } catch (error) {
-        displayMessage("Network error occurred while fetching riddle.", true);
-    }
-}
-
-// Function to display a riddle once a day
 function displayRiddle() {
-    const today = new Date().toDateString();
-    const lastFetchedDate = localStorage.getItem('riddleDate');
-
-    if (lastFetchedDate === today && localStorage.getItem('riddleQuestion')) {
-        // Use the riddle from local storage if it was already fetched today
-        currentRiddle = {
-            question: localStorage.getItem('riddleQuestion'),
-            answer: localStorage.getItem('riddleAnswer')
-        };
-        riddleText.textContent = currentRiddle.question;
-    } else {
-        // Fetch a new riddle from the API
-        fetchRiddle().then(() => {
-            localStorage.setItem('riddleDate', today);
-            localStorage.setItem('riddleQuestion', currentRiddle.question);
-            localStorage.setItem('riddleAnswer', currentRiddle.answer);
-        });
-    }
+    const riddles = [
+        { question: "What has keys but can't open locks?", answer: "piano" },
+        { question: "What has a head, a tail, but no body?", answer: "coin" },
+        { question: "What comes once in a minute, twice in a moment, but never in a thousand years?", answer: "m" },
+        { question: "I'm tall when I'm young, and I'm short when I'm old. What am I?", answer: "candle" },
+        { question: "What has to be broken before you can use it?", answer: "egg" },
+        { question: "What runs but never walks, has a mouth but never talks?", answer: "river" },
+        { question: "What comes down but never goes up?", answer: "rain" },
+        { question: "What has hands but can't clap?", answer: "clock" },
+        { question: "What has a bed but never sleeps?", answer: "river" },
+        { question: "What is always in front of you but can't be seen?", answer: "future" },
+        { question: "What can travel around the world while staying in a corner?", answer: "stamp" },
+        { question: "What is full of holes but still holds water?", answer: "sponge" },
+        { question: "What gets wetter as it dries?", answer: "towel" },
+        { question: "What can you catch but not throw?", answer: "cold" },
+        { question: "What has a heart that doesn't beat?", answer: "artichoke" },
+        { question: "What has an eye but cannot see?", answer: "needle" },
+        { question: "What belongs to you but others use it more than you do?", answer: "name" },
+        { question: "What goes up but never comes down?", answer: "age" },
+        { question: "What has one head, one foot, and four legs?", answer: "bed" }
+    ];
+    const riddleIndex = new Date().getDate() % riddles.length;
+    currentRiddle = riddles[riddleIndex];
+    riddleText.textContent = currentRiddle.question;
 }
 
 function requestUsername() {
-    // Only prompt for username if it hasn't been set yet.
-    if (!username) {
+    while (true) {
         const enteredUsername = prompt("Enter your username:");
-        
-        // Check if the username is valid and not already taken
         if (enteredUsername && !users.has(enteredUsername)) {
             username = enteredUsername;
-            addUser(username); // Add user to the list
-            displayMessage(`You have joined as ${username}.`, true); // Display system message
+            addUser(username);
+            displayMessage(`You have joined as ${username}.`, true);
+            break;
         } else {
-            // Alert if the username is taken or invalid, and try again
             alert("Username is taken or invalid. Please try again.");
-            requestUsername(); // Re-prompt for username
         }
     }
 }
-
 
 function displayMessage(message, isSystem = false) {
     const messageElement = document.createElement('div');
@@ -93,93 +69,18 @@ function sendMessage() {
         displayMessage(`${username}: ${messageText}`);
         messageInput.value = '';
     }
-    socket.emit("sendMessage",messageText)
-    
-}
-
-socket.on("recieveMessage",function(data)
-{
-    displayMessage(`${data["name"]}: ${data["message"]}`)
-})
-
-function isAnswerCloseEnough(userAnswer, correctAnswer) {
-    // If the answer matches exactly, it’s correct
-    if (userAnswer === correctAnswer) {
-        return true;
-    }
-
-    // Normalize correct answer keywords
-    const correctKeywords = correctAnswer
-        .replace(/[^\w\s]/g, '')  // Remove punctuation
-        .toLowerCase()
-        .split(' ')
-        .filter(word => word.length > 2); // Filter out very short words
-
-    // Normalize the user's answer
-    const normalizedAnswer = userAnswer.trim().toLowerCase();
-
-    // Check if the user's answer contains a minimum threshold of keywords
-    const keywordsMatched = correctKeywords.filter(keyword => normalizedAnswer.includes(keyword));
-    const matchThreshold = Math.ceil(correctKeywords.length * 0.3); // Set to 30%
-
-    return keywordsMatched.length >= matchThreshold;
 }
 
 function checkAnswer() {
-    const userAnswer = answerInput.value.trim().toLowerCase();  
-    const correctAnswer = currentRiddle.answer.toLowerCase();   
-
-    // Try exact match first
-    if (userAnswer === correctAnswer) {
-        displayMessage(`${username} got it right!`, true);
-    } else if (isAnswerCloseEnough(userAnswer, correctAnswer)) {
+    const userAnswer = answerInput.value.trim().toLowerCase();
+    if (userAnswer === currentRiddle.answer) {
         displayMessage(`${username} got it right!`, true);
     } else {
         displayMessage(`${username} guessed wrong! Try again.`, true);
     }
-
     answerInput.value = '';
 }
 
-
-// Initial setup
 displayMessage("Welcome to the Riddle Room Chat!", true);
-requestUsername();
-displayRiddle();
-
-// Store messages in an array
-let messageHistory = JSON.parse(localStorage.getItem('chatMessages')) || [];
-
-// Function to save messages to local storage
-function saveMessagesToLocalStorage() {
-    localStorage.setItem('chatMessages', JSON.stringify(messageHistory));
-}
-
-// Function to load messages from local storage
-function loadMessagesFromLocalStorage() {
-    messageHistory.forEach(message => {
-        displayMessage(message.text, message.isSystem);
-    });
-}
-
-// Update sendMessage function to save each message
-function sendMessage() {
-    const messageText = messageInput.value.trim();
-    if (messageText !== '') {
-        const message = { text: `${username}: ${messageText}`, isSystem: false };
-        displayMessage(message.text);
-        
-        // Add to message history and save to localStorage
-        messageHistory.push(message);
-        saveMessagesToLocalStorage();
-        
-        messageInput.value = '';
-    }
-    socket.emit("sendMessage", messageText);
-}
-
-// Initial setup
-displayMessage("Welcome to the Riddle Room Chat!", true);
-loadMessagesFromLocalStorage();
 requestUsername();
 displayRiddle();
