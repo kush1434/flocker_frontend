@@ -14,7 +14,7 @@ Exchange of information could be:
 
 1. sharing a file:  `wget "raw-link.ipynb"
 2. creating a template from this repository
-3. sharing a fork among team members
+3. sharing a fork among team member
 4. etc.
 
 ---
