@@ -24,8 +24,6 @@ author: Bailey, Travis, Leon, Anyi
 </table>
 <!-- END OF NAV MENU -->
 
-DNHS Satire Home Page
-
 <style>
   /* Reset */
   * {
@@ -42,7 +40,7 @@ DNHS Satire Home Page
   }
 
   /* Container to center everything */
-  .container {
+.container {
     width: 80%;
     margin: auto;
     display: flex;
@@ -62,6 +60,7 @@ DNHS Satire Home Page
     color: #ffffff;
     margin-bottom: 15px;
     border-radius: 10px;
+    box-shadow: 0px 0px 10px 5px #3b5998;
   }
 
   /* Intro Blurb */
@@ -72,6 +71,7 @@ DNHS Satire Home Page
     font-size: 18px;
     color: #cccccc;
     border-radius:10px;
+    box-shadow: 0px 0px 10px 5px #2b2b2b;
   }
 
   /* Main layout - Sidebar and Feed */
@@ -87,10 +87,12 @@ DNHS Satire Home Page
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 200px;
     align-items: center;
     padding: 15px;
     background-color: #333333;
     border-radius: 8px;
+    box-shadow: 0px 0px 10px 5px #333333;
   }
 
   .add-post {
@@ -105,10 +107,12 @@ DNHS Satire Home Page
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    transition: background-color 0.5s;
+    transition: all 0.5s;
+    box-shadow: 0px 0px 10px 5px #3b5998;
   }
   .add-post:hover{
     background-color: #5c79f8 !important;
+    box-shadow: 0px 0px 15px 7.5px #5c79f8;
   }
 
   .search-bar input {
@@ -164,6 +168,7 @@ DNHS Satire Home Page
     border-radius: 8px;
     font-size: 18px;
     color: #e0e0e0;
+    box-shadow: 0px 0px 10px 5px #333333;
   }
 
   .post-actions {
@@ -201,6 +206,7 @@ DNHS Satire Home Page
     padding: 15px;
     background-color: #444444;
     border-radius: 8px;
+    box-shadow: 0px 0px 10px 5px #444444;
   }
 
   .profile {
@@ -209,6 +215,7 @@ DNHS Satire Home Page
     border-radius: 8px;
     text-align: center;
     color: #ffffff;
+    box-shadow: 0px 0px 5px 2.5px #d81b60;
   }
 
   .profile-pic {
@@ -237,38 +244,48 @@ DNHS Satire Home Page
     background-color: #333333;
     color: #ffffff;
     margin-bottom: 10px;
+    box-shadow: 0px 0px 10px 5px #333333;
   }
 
   #postButton{
     cursor: pointer;
-    transition: background-color 0.5s;
+    transition: all 0.5s;
+    background-color:#455545 !important;
+    box-shadow: 0px 0px 1px 1px #455545;
   }
   #postButton:hover{
     background-color:#407540 !important;
+    box-shadow: 0px 0px 5px 2.5px #407540;
   }
 
   .like{
-    transition: background-color 0.5s;
+    transition: all 0.5s;
     background-color:#555555 !important;
+    box-shadow: 0px 0px 1px 1px #555555;
   }
   .like:hover{
-    background-color:#655555 !important;
+    background-color:#705555 !important;
+    box-shadow: 0px 0px 5px 2.5px #705555;
   }
 
   .comment{
-    transition: background-color 0.5s;
+    transition: all 0.5s;
     background-color:#555555 !important;
+    box-shadow: 0px 0px 1px 1px #555555;
   }
   .comment:hover{
-    background-color:#606060 !important;
+    background-color:#656565 !important;
+    box-shadow: 0px 0px 5px 2.5px #656565;
   }
 
   .share{
-    transition: background-color 0.5s;
+    transition: all 0.5s;
     background-color:#555555 !important;
+    box-shadow: 0px 0px 1px 1px #555555;
   }
   .share:hover{
-    background-color:#555565 !important;
+    background-color:#555570 !important;
+    box-shadow: 0px 0px 5px 2.5px #555570;
   }
 
 
@@ -293,7 +310,7 @@ DNHS Satire Home Page
   <!-- Left Sidebar (Add Post and Search Bar) -->
   <div class="left-sidebar">
       <button class="add-post" onclick="togglePostForm()"><img src="{{site.baseurl}}//images/p1group5images/plusicon.png"></button>
-      <p>Add new post</p>
+      <p>Add new temporary post</p>
       <div class="search-bar">
         <input type="text" placeholder="Search...">
       </div>
@@ -312,7 +329,6 @@ DNHS Satire Home Page
     <button onclick="addHashtag('#Community')">#Community</button>
     <!-- Add more hashtags as needed -->
   </div>
-</div>
 </div>
 
 <script>
@@ -449,4 +465,264 @@ DNHS Satire Home Page
     document.getElementById("postContent").value = "";
     togglePostForm();
   }
+</script>
+
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        max-width: 1200px;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        max-width: 800px;
+        width: 100%;
+        background-color: #2c3e50;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        color: #ecf0f1;
+    }
+    .form-container label {
+        margin-bottom: 5px;
+    }
+    .form-container input, .form-container textarea, .form-container select {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        width: 100%;
+    }
+    .form-container button {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #34495e;
+        color: #ecf0f1;
+        cursor: pointer;
+    }
+</style>
+
+<div class="container">
+    <div class="form-container">
+        <h2>Select Group and Channel</h2>
+        <form id="selectionForm">
+            <label for="group_id">Group:</label>
+            <select id="group_id" name="group_id" required>
+                <option value="">Select a group</option>
+            </select>
+            <label for="channel_id">Channel:</label>
+            <select id="channel_id" name="channel_id" required>
+                <option value="">Select a channel</option>
+            </select>
+            <button type="submit">Select</button>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <div id="data" class="data">
+        <div class="left-side">
+            <p id="count"></p>
+        </div>
+        <div class="details" id="details">
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    // Import server URI and standard fetch options
+    import { pythonURI, fetchOptions } from '{{ site.baseurl }}/assets/js/api/config.js';
+
+    /**
+     * Fetch groups for dropdown selection
+     * User picks from dropdown
+     */
+    async function fetchGroups() {
+        try {
+            const response = await fetch(`${pythonURI}/api/groups/filter`, {
+                ...fetchOptions,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ section_name: "Shared Interest" }) // Adjust the section name as needed
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch groups: ' + response.statusText);
+            }
+            const groups = await response.json();
+            const groupSelect = document.getElementById('group_id');
+            groups.forEach(group => {
+                const option = document.createElement('option');
+                option.value = group.name; // Use group name for payload
+                option.textContent = group.name;
+                groupSelect.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error fetching groups:', error);
+        }
+    }
+
+    /**
+     * Fetch channels based on selected group
+     * User picks from dropdown
+     */
+    async function fetchChannels(groupName) {
+        try {
+            const response = await fetch(`${pythonURI}/api/channels/filter`, {
+                ...fetchOptions,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ group_name: groupName })
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch channels: ' + response.statusText);
+            }
+            const channels = await response.json();
+            const channelSelect = document.getElementById('channel_id');
+            channelSelect.innerHTML = '<option value="">Select a channel</option>'; // Reset channels
+            channels.forEach(channel => {
+                const option = document.createElement('option');
+                option.value = channel.id;
+                option.textContent = channel.name;
+                channelSelect.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error fetching channels:', error);
+        }
+    }
+
+    /**
+      * Handle group selection change
+      * Channel Dropdown refresh to match group_id change
+      */
+    document.getElementById('group_id').addEventListener('change', function() {
+        const groupName = this.value;
+        if (groupName) {
+            fetchChannels(groupName);
+        } else {
+            document.getElementById('channel_id').innerHTML = '<option value="">Select a channel</option>'; // Reset channels
+        }
+    });
+
+    /**
+     * Handle form submission for selection
+     * Select Button: Computer fetches and displays posts
+     */
+    document.getElementById('selectionForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const groupId = document.getElementById('group_id').value;
+        const channelId = document.getElementById('channel_id').value;
+        if (groupId && channelId) {
+            fetchData(channelId);
+        } else {
+            alert('Please select both group and channel.');
+        }
+    });
+
+    /**
+     * Handle form submission for adding a post
+     * Add Form Button: Computer handles form submission with request
+     */
+    document.getElementById('postForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        // Extract data from form
+        const title = document.getElementById('title').value;
+        const comment = document.getElementById('comment').value;
+        const channelId = document.getElementById('channel_id').value;
+
+        // Create API payload
+        const postData = {
+            title: title,
+            comment: comment,
+            channel_id: channelId
+        };
+
+        // Trap errors
+        try {
+            // Send POST request to backend, purpose is to write to database
+            const response = await fetch(`${pythonURI}/api/post`, {
+                ...fetchOptions,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postData)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to add post: ' + response.statusText);
+            }
+
+            // Successful post
+            const result = await response.json();
+            alert('Post added successfully!');
+            document.getElementById('postForm').reset();
+            fetchData(channelId);
+        } catch (error) {
+            // Present alert on error from backend
+            console.error('Error adding post:', error);
+            alert('Error adding post: ' + error.message);
+        }
+    });
+
+    /**
+     * Fetch posts based on selected channel
+     * Handle response: Fetch and display posts
+     */
+    async function fetchData(channelId) {
+        try {
+            const response = await fetch(`${pythonURI}/api/posts/filter`, {
+                ...fetchOptions,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ channel_id: channelId })
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch posts: ' + response.statusText);
+            }
+
+            // Parse the JSON data
+            const postData = await response.json();
+
+            // Extract posts count
+            const postCount = postData.length || 0;
+
+            // Update the HTML elements with the data
+            document.getElementById('count').innerHTML = `<h2>Count ${postCount}</h2>`;
+
+            // Get the details div
+            const detailsDiv = document.getElementById('details');
+            detailsDiv.innerHTML = ''; // Clear previous posts
+
+            // Iterate over the postData and create HTML elements for each item
+            postData.forEach(postItem => {
+                const postElement = document.createElement('div');
+                postElement.className = 'post-item';
+                postElement.innerHTML = `
+                    <h3>${postItem.title}</h3>
+                    <p><strong>Channel:</strong> ${postItem.channel_name}</p>
+                    <p><strong>User:</strong> ${postItem.user_name}</p>
+                    <p>${postItem.comment}</p>
+                `;
+                detailsDiv.appendChild(postElement);
+            });
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    // Fetch groups when the page loads
+    fetchGroups();
 </script>
